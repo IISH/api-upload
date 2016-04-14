@@ -1,7 +1,10 @@
 package org.iish.api.upload.web;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,11 +17,32 @@ import java.util.zip.ZipInputStream;
 
 @Controller
 public class MainController {
+    private @Value("${api.key}") String apiKey;
+
     private @Value("${upload.directory}") String uploadDirectory;
+    private @Value("${datestamp.directory}") String datestampDirectory;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
+    }
+
+    @RequestMapping(value = "/datestamp/{na}/{pid}", method = RequestMethod.PUT)
+    public ResponseEntity<String> datestampUpdate(@PathVariable String na, @PathVariable String pid,
+                                                  @RequestParam String key) throws IOException {
+        if (apiKey.equals(key)) {
+            String path = this.uploadDirectory + File.separator + na + File.separator + pid;
+            File file = new File(path);
+
+            file.getParentFile().mkdirs();
+            if (file.exists() || file.createNewFile()) {
+                return new ResponseEntity<>("OK!", HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>("Failed to update datestamp", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("Incorrect access token", HttpStatus.UNAUTHORIZED);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

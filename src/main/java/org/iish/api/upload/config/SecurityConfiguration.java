@@ -18,6 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity
                 // All pages require authorization first
                 .authorizeRequests()
+                    .antMatchers("/datestamp/**").permitAll()
                     .anyRequest().hasRole("USER")
                     .and()
                 // Disable Cross-Site Request Forgery token
