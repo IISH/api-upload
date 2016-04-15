@@ -33,8 +33,17 @@
     </style>
 </head>
 <body>
+<div><p>The package must correspond to this folder structure:</p>
+    <blockquote>
+        <ul>
+            <li>iish.archieven<ul><li>add_update</li><li>delete</li></ul></li>
+            <li>eci<ul><li>add_update</li><li>delete</li></ul></li>
+        </ul>
+    </blockquote></div>
 <div class="center">
     <h1>Upload ZIP file</h1>
+
+
 
     <#if error??>
         <span class="error">

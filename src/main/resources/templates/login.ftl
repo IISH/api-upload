@@ -22,7 +22,7 @@
 <div class="center">
     <h1>Login</h1>
 
-    <form method="post" action="/login">
+    <form method="post" action="login">
         <label for="username">Username:</label> &nbsp; <input type="text" id="username" name="username"/> <br/>
         <label for="password">Password:</label> &nbsp; <input type="password" id="password" name="password"/> <br/>
         <input type="submit" value="Login"/>
