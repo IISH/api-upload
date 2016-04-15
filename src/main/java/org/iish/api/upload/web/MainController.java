@@ -57,11 +57,6 @@ public class MainController {
             return "redirect:/";
         }
 
-        if (!file.getContentType().equalsIgnoreCase("application/zip")) {
-            redirectAttributes.addFlashAttribute("error", "Uploaded file is not a zip file!");
-            return "redirect:/";
-        }
-
         try {
             extractZip(file.getInputStream());
         }
