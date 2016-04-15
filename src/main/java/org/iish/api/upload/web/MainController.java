@@ -31,7 +31,7 @@ public class MainController {
     public ResponseEntity<String> datestampUpdate(@PathVariable String na, @PathVariable String pid,
                                                   @RequestParam String key) throws IOException {
         if (apiKey.equals(key)) {
-            String path = this.uploadDirectory + File.separator + na + File.separator + pid;
+            String path = this.datestampDirectory + File.separator + na + File.separator + pid;
             File file = new File(path);
 
             file.getParentFile().mkdirs();
